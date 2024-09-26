@@ -21,7 +21,7 @@ window.addEventListener("load", function () {
       TODAY_GOOD = obj.todaygood;
       // 세일물품
       SALE_GOOD = obj.salegood;
-
+      NEW_GOOD = obj.newgood;
       //   console.log(VISUAL_ARR);
       // ================
       // 비주얼을 화면에 배치
@@ -218,5 +218,8 @@ window.addEventListener("load", function () {
       },
     })
   }
+  // 두번째 화면 출력(오른쪽)
+  let html = "";
+  
   //   ==========================end
 });
