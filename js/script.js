@@ -33,7 +33,10 @@ window.addEventListener("load", function () {
       POPULAR_GOOD = obj.populargood;
       // 브랜드관
       BRAND_ARR = obj.brandarr;
+      // 배너
       BANNER_ARR = obj.bannerarr;
+      // 제철요리
+      SEASON_GOOD = obj.seasongood;
       // ================
       // 비주얼을 화면에 배치
       showVisual();
@@ -51,8 +54,10 @@ window.addEventListener("load", function () {
       showPopularGood();
       // 브랜드관 화면배치
       showBrandArr();
-
+      // 배너 화면배치
       showBannerArr();
+      // 제철요리 화면배치
+      showSeasonGood();
     }
   };
   //   자료호출
@@ -88,9 +93,12 @@ window.addEventListener("load", function () {
   // 브랜드관 목록
   let BRAND_ARR;
   let brandTag = this.document.getElementById("data-brand");
-  // 배너
+  // 배너 목록
   let BANNER_ARR;
   let bannerTag = this.document.getElementById("data-banner");
+  // 제철요리 목록
+  let SEASON_GOOD;
+  let seosonTag = this.document.getElementById("data-season");
   // ==============================================
   // 비주얼 화면 출력 기능
   function showVisual() {
@@ -396,10 +404,14 @@ window.addEventListener("load", function () {
     });
     // 아이콘에 클릭했을때 해당하는 목록 이벤트
     const tag = document.querySelectorAll(".popular-slide a");
+
+    // 첫 번째 아이콘 활성화
     tag[1].style.border = "2px solid #76bd42";
+    tag[1].style.backgroundColor = "#fff"; // 배경색을 흰색으로 설정
     const firstIconSpanTag = tag[1].querySelector(".popular-cate-icon");
     if (firstIconSpanTag) {
       firstIconSpanTag.style.backgroundPositionY = "-64px";
+      firstIconSpanTag.classList.add("active"); // 첫 번째 아이콘은 처음부터 활성화 상태
     }
 
     tag.forEach(function (item, index) {
@@ -408,6 +420,8 @@ window.addEventListener("load", function () {
         const spanTag = this.querySelector(".popular-cate-icon");
         if (!spanTag.classList.contains("active")) {
           spanTag.style.backgroundPositionY = "-64px";
+          this.style.backgroundColor = "#fff"; // 호버 시 배경색을 흰색으로 설정
+          this.style.border = "2px solid #76bd42"; // 호버 시 테두리 색상 변경
         }
       });
 
@@ -416,6 +430,13 @@ window.addEventListener("load", function () {
         const spanTag = this.querySelector(".popular-cate-icon");
         if (!spanTag.classList.contains("active")) {
           spanTag.style.backgroundPositionY = "0px";
+          this.style.backgroundColor = ""; // 원래 배경색으로 복원
+          this.style.border = "none"; // 원래 테두리로 복원
+        }
+        // tag[1]에 대해서는 마우스 리브 동작 무시
+        // tag[1]이 활성화 상태가 아니면 마우스 리브 기능 적용
+        if (item === tag[1] && spanTag.classList.contains("active")) {
+          return; // tag[1]이 활성화 상태면 무시
         }
       });
 
@@ -434,10 +455,12 @@ window.addEventListener("load", function () {
           const otherSpanTag = item.querySelector(".popular-cate-icon");
           if (otherSpanTag) {
             otherSpanTag.style.backgroundPositionY = "0px";
+            item.style.backgroundColor = "#f9f9f9";
             otherSpanTag.classList.remove("active");
           }
         });
 
+        // 현재 클릭된 아이콘을 활성화
         this.style.backgroundColor = "#fff";
         this.style.border = "2px solid #76bd42";
         const spanTag = this.querySelector(".popular-cate-icon");
@@ -538,10 +561,10 @@ window.addEventListener("load", function () {
   function showBannerArr() {
     let html = `
      <div class = "swiper sw-banner">
-    <div class = "swiper-wrapper">
+  <div class = "swiper-wrapper">
     `;
     BANNER_ARR.forEach(function (item) {
-      console.log(item);
+      // console.log(item);
       let tag = `
       <div class="swiper-slide">
             <a href="${item.link}">
@@ -552,8 +575,8 @@ window.addEventListener("load", function () {
       html += tag;
     });
     html += `
-      </div>
-      </div>
+    </div>
+    </div>
     `;
     bannerTag.innerHTML = html;
     const swBanner = new Swiper(".sw-banner", {
@@ -568,6 +591,104 @@ window.addEventListener("load", function () {
         nextEl: ".banner .slide-next",
       },
     });
+  }
+  // 제철요리 화면 출력 기능
+  function showSeasonGood() {
+    let html = "";
+    SEASON_GOOD.forEach(function (item, index) {
+      // console.log(item, index);
+      const tag = `
+        <li>
+                    <div class="season-good clearfix">
+                      <input type="checkbox" id="ch${index}" class="season-good-check season-item" value="${item.price}">
+                      <label for="ch${index}" class="season-label"></label>
+                      <a href="${item.link}" class="season-good-img">
+                        <img src="images/${item.pic}" alt="${item.title}">
+                      </a>
+                      <p class="season-good-info">
+                        <a href="${item.link}" class="season-good-title">${item.title}</a>
+                        <a href="${item.link}" class="season-good-price">
+                            <em>${priceToString(item.price)}</em>원
+                        </a>
+                      </p>
+                    </div>
+                   </li>
+      `;
+      html += tag;
+    });
+    seosonTag.innerHTML = html;
+    Scrollbar.initAll(); // smooth scrollbar 적용
+    checkBoxFn();
+    showBuyGood();
+  }
+  // 제철요리 전체 체크박스 기능
+  const buyTotal = this.document.getElementById("buy-total"); //총갯수
+  const bytTotalMoney = this.document.getElementById("buy-total-money");
+  let buyTotalCount = 0; // 기본값
+  let buyTotalMoneyPrice = 0; // 기본값
+  // 전체 체크박스 기능
+  const chkAll = this.document.getElementById("chkall");
+  chkAll.addEventListener("change", function () {
+    const chkArr = document.querySelectorAll(".season-item");
+    // console.log(chkArr);
+
+    if (chkAll.checked) {
+      // 전체 체크를 해야하는 경우
+      chkArr.forEach(function (item) {
+        // console.log(item);
+        item.checked = true;
+      });
+    } else {
+      chkArr.forEach(function (item) {
+        // console.log(item);
+        item.checked = false;
+      });
+    }
+    // 계산출력 기능 호출
+    showBuyGood();
+  });
+  // 체크박스 각각의 기능
+  function checkBoxFn() {
+    const chkArr = document.querySelectorAll(".season-item");
+    chkArr.forEach(function (item) {
+      // console.log(item);
+      item.addEventListener("change", function () {
+        // 계산출력 기능 호출
+        showBuyGood();
+      });
+    });
+  }
+  // 계산출력하는 기능 함수
+  function showBuyGood() {
+    // 체크가 된 값을 카운팅하고 더한다.
+    let count = 0; //체크된 상품의 수를 저장할 변수
+    let priceTotal = 0; //체크된 상품들의 총 가격을 저장할 변수
+    const chkArr = document.querySelectorAll(".season-item");
+    //모든 체크박스 요소를 가져와서 배열에 저장
+    chkArr.forEach(function (item) {
+      // console.log(item);
+      const state = item.checked; //현재 체크박스에 체크상태를 확인
+      // console.log(state);
+      if (state) {
+        // 체크박스가 되어있으면
+        count += 1; // 체크된 상품의 수를 증가 count++
+        // console.log(count);
+        const price = parseInt(item.value);
+        // console.log(price);
+        priceTotal += price;
+      }
+    });
+    // 체크된 상품의 수를 전역변수에 저장
+    buyTotalCount = count;
+    // console.log(buyTotalCount);
+    // 총가격을 전역변수에 저장
+    buyTotalMoneyPrice = priceTotal;
+    // console.log(buyTotalMoneyPrice);
+    // 체크된 갯수만큼 갯수 변경
+    buyTotal.innerHTML = buyTotalCount
+    // 체크된 갯수만큼 금액 변경
+    bytTotalMoney.innerHTML = priceToString(buyTotalMoneyPrice)
+
   }
   //   ==========================end
 });
