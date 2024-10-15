@@ -1,103 +1,102 @@
 /* 커뮤니티 */
 .community {
-    position: relative;
-    display: block;
-  }
-  .community-notice,
-  .community-info,
-  .community-help {
-    position: relative;
-    display: block;
-    width: calc(100% / 3);
-    padding: 0 40px;
-    float: left;
-  }
-  .community-notice dl {
-    position: relative;
-    display: block;
-  }
-  .community-notice dl > dt {
-    position: relative;
-    display: block;
-    padding: 0 10px;
-    float: left;
-  }
-  .community-notice dl > dd {
-    position: absolute;
-    width: 100%;
-    left: 0;
-    top: 50px;
-    display: none;
-  }
-  .community-notice dl > dt:nth-child(1) {
-    padding-left: 0;
-  }
-  .community-notice dl > dt:nth-child(1)::after {
-    content: "";
-    position: absolute;
-    right: 0;
-    top: 4px;
-    display: block;
-    width: 1px;
-    height: 18px;
-    background-color: #e5e5e5;
-  }
-  
-  .community-bt {
-    position: relative;
-    display: block;
-    border: 0;
-    cursor: pointer;
-    background: transparent;
-    font-size: 20px;
-    color: #999;
-  }
-  .community-bt-active {
-    color: #000;
-    font-weight: 700;
-  }
-  .community-visible-active {
-    display: block !important;
-  }
-  .notice-list {
-    position: relative;
-    display: block;
-  }
-  
-  .notice-list > li {
-    position: relative;
-    display: block;
-    line-height: 1;
-    margin-bottom: 15px;
-  }
-  
-  .notice-list > li > a {
-    position: relative;
-    display: block;
-    font-size: 13px;
-  }
-  
-  .notice-list > li > a > span {
-    position: relative;
-    display: inline-block;
-    /* 말줄임 */
-    width: 240px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  
-  .notice-list > li > a > em {
-    position: relative;
-    display: inline-block;
-    width: calc(100% - 240px);
-    color: #999;
-    font-style: normal;
-    text-align: right;
-    vertical-align: 2px;
-  }
-  
-  
+  position: relative;
+  display: block;
+}
+.community-notice,
+.community-info,
+.community-help {
+  position: relative;
+  display: block;
+  width: calc(100% / 3);
+  padding: 0 40px;
+  float: left;
+}
+.community-notice dl {
+  position: relative;
+  display: block;
+}
+.community-notice dl > dt {
+  position: relative;
+  display: block;
+  padding: 0 10px;
+  float: left;
+}
+.community-notice dl > dd {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 50px;
+  display: none;
+}
+.community-notice dl > dt:nth-child(1) {
+  padding-left: 0;
+}
+.community-notice dl > dt:nth-child(1)::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 4px;
+  display: block;
+  width: 1px;
+  height: 18px;
+  background-color: #e5e5e5;
+}
+
+.community-bt {
+  position: relative;
+  display: block;
+  border: 0;
+  cursor: pointer;
+  background: transparent;
+  font-size: 20px;
+  color: #999;
+}
+.community-bt-active {
+  color: #000;
+  font-weight: 700;
+}
+.community-visible-active {
+  display: block !important;
+}
+.notice-list {
+  position: relative;
+  display: block;
+}
+
+.notice-list > li {
+  position: relative;
+  display: block;
+  line-height: 1;
+  margin-bottom: 15px;
+}
+
+.notice-list > li > a {
+  position: relative;
+  display: block;
+  font-size: 13px;
+}
+
+.notice-list > li > a > span {
+  position: relative;
+  display: inline-block;
+  /* 말줄임 */
+  width: 240px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.notice-list > li > a > em {
+  position: relative;
+  display: inline-block;
+  width: calc(100% - 240px);
+  color: #999;
+  font-style: normal;
+  text-align: right;
+  vertical-align: 2px;
+}
+
 .community-info h3 {
     position: relative;
     display: block;
