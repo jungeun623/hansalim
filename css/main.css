@@ -60,12 +60,12 @@ body {
   overflow: hidden;
 }
 
-.fix-list{
+.fix-list {
   position: relative;
   display: block;
 }
 
-.fix-list > li{
+.fix-list > li {
   position: relative;
   display: block;
   text-align: center;
@@ -75,53 +75,52 @@ body {
   margin-bottom: 10px;
 }
 
-.fix-list > li > a{
+.fix-list > li > a {
   position: relative;
   display: block;
 }
-.fix-list > li > a::after{
+.fix-list > li > a::after {
   content: "";
   position: relative;
   display: inline-block;
   width: 36px;
   height: 32px;
   background: url("../images/icoFloating.png") no-repeat;
-  
 }
-.fix-login::after{
+.fix-login::after {
   background-position: 0 0;
 }
-.fix-shop::after{
+.fix-shop::after {
   background-position: 0 -32px !important;
 }
-.good-recent::after{
+.good-recent::after {
   content: none !important;
 }
-.good-recent{
+.good-recent {
   display: inline-block !important;
   width: 50px;
   height: 50px;
   overflow: hidden;
 }
-.good-recent img{
+.good-recent img {
   width: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50% , -50%);
+  transform: translate(-50%, -50%);
 }
-.fix-qa::after{
+.fix-qa::after {
   background-position: 0 calc(-32px * 2) !important;
 }
-.fix-talk::after{
+.fix-talk::after {
   background-position: 0 calc(-32px * 3) !important;
 }
-.fix-list > li span{
+.fix-list > li span {
   position: relative;
   display: block;
 }
 
-.fix-top{
+.fix-top {
   position: absolute;
   left: 0;
   bottom: 0;
@@ -273,4 +272,60 @@ body {
 .good-slide {
   position: relative;
   display: block;
+}
+
+/* 안내창 */
+.modal-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999999;
+}
+.modal-main {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 500px;
+  background-color: #fff;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 150px;
+  border-radius: 30px;
+}
+.modal-logo {
+  position: absolute;
+  display: block;
+  top: -50px;
+  left: 50%;
+  transform: translate(-50%);
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: url("../images/chat-btn.png") no-repeat center #dbf4c7;
+  border: 6px solid #fff;
+}
+.modal-notice {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 2;
+}
+.modal-notice strong {
+  color: red;
+  background: linear-gradient(to top, yellow 50%, transparent 50%);
+}
+.modal-notice span {
+  font-size: 16px;
+  font-weight: 300;
+}
+.modal-close {
+  background-color: #d8d8d8;
+  padding: 15px;
+  border-radius: 0 0 30px 30px;
 }
